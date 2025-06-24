@@ -5,6 +5,8 @@ from dataclasses import dataclass
 import os ,sys
 import pandas as pd
 
+from src.components.data_transformer import DataTransformer
+
 @dataclass
 class DataIngestionConfig:
     train_data_path:str = os.path.join("artifacts",'train.csv')
@@ -44,4 +46,10 @@ class DataIngestion:
 
 if __name__=="__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_path,test_path = obj.initiate_data_ingestion()
+
+    data_tranformer = DataTransformer()
+    data_tranformer.initiate_data_transformation(train_path,test_path)
+
+
+
