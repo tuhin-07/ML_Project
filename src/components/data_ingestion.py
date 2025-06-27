@@ -6,6 +6,7 @@ import os ,sys
 import pandas as pd
 
 from src.components.data_transformer import DataTransformer
+from src.components.model_trainer import ModelTrainer
 
 @dataclass
 class DataIngestionConfig:
@@ -49,7 +50,10 @@ if __name__=="__main__":
     train_path,test_path = obj.initiate_data_ingestion()
 
     data_tranformer = DataTransformer()
-    data_tranformer.initiate_data_transformation(train_path,test_path)
+    train_data,test_data,_ = data_tranformer.initiate_data_transformation(train_path,test_path)
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_data,test_data))
 
 
 
